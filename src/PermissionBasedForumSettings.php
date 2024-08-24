@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\UserDirectory;
+namespace Nodeloc\LeaderBoard;
 
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Settings\SettingsRepositoryInterface;
@@ -29,8 +29,8 @@ class PermissionBasedForumSettings
     public function __invoke(ForumSerializer $serializer, $model, array $attributes): array
     {
         // The link is visible if the user can access the user directory AND the link was enabled in extension settings
-        $attributes['canSeeUserDirectoryLink'] = $serializer->getActor()->can('seeUserList') && $this->settings->get('fof-user-directory-link');
-        $attributes['userDirectoryDefaultSort'] = $this->settings->get('fof-user-directory.default-sort') ?: 'default';
+        $attributes['canSeeLeaderBoardLink'] = $serializer->getActor()->can('seeUserList') && $this->settings->get('nodeloc-leaderboard-link');
+        $attributes['leaderBoardDefaultSort'] = $this->settings->get('nodeloc-leaderboard.default-sort') ?: 'default';
 
         // Only serialize if the actor has permission
         if ($permission = $serializer->getActor()->hasPermission('user.suspend')) {

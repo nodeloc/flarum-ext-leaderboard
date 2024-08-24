@@ -5,7 +5,7 @@ import Component from 'flarum/common/Component';
 import avatar from "flarum/helpers/avatar";
 import username from "flarum/helpers/username";
 
-export default class SmallUserCard extends Component {
+export default class LeaderBoardUserCard extends Component {
     /**
      * Allowing to add additonal items unique to the user directory.
      *
@@ -15,19 +15,25 @@ export default class SmallUserCard extends Component {
         const user = this.attrs.user;
         const sort = this.attrs.params.sort;
         const userProfileLink = app.route.user(user);
+
         const points = user.attribute(sort) || '0';
         const position = this.attrs.position;
+
         let avatarWithFrame, usernameWithColor;
         if('ziiven-decoration-store' in flarum.extensions){
             const { components } = require('@ziiven-decoration-store');
             avatarWithFrame = components.avatarWithFrame;
             usernameWithColor = components.usernameWithColor;
-        }        // 根据 position 的值来设置类名
+        }
+        // 根据 position 的值来设置类名
         let positionClass = '';
+        let displayPosition = position;
         if (position === 1) {
-            positionClass = 'first';
-        } else if (position === 2) {
             positionClass = 'second';
+            displayPosition = 2;
+        } else if (position === 2) {
+            positionClass = 'first';
+            displayPosition = 1;
         } else if (position === 3) {
             positionClass = 'third';
         }
@@ -46,9 +52,6 @@ export default class SmallUserCard extends Component {
         }
         return (
             <a href={userProfileLink}>
-                                <span className={`LeaderboardListItem-position ${positionClass}`}>
-          {position}
-        </span>
                 {avatarWithFrame?avatarWithFrame(user):avatar(user)}
                 <div className="LeaderboardListItem-username">
                     <div>
@@ -62,9 +65,9 @@ export default class SmallUserCard extends Component {
                     data-original-title={`${points} Points`}
                 >
                  {icon(iconClass)}
-                    {points}
-        </span>
-
+                 {points}
+                </span>
+                <span className={`LeaderboardListItem-position ${positionClass}`}>{displayPosition}</span>
             </a>
         );
     }

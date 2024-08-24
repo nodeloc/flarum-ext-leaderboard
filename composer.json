@@ -1,61 +1,40 @@
 {
-    "name": "fof/user-directory",
-    "description": "The permission based public user directory extension for your Flarum forum.",
+    "name": "nodeloc/flarum-ext-leaderboard",
+    "description": "The permission based public leaderboard extension for your Flarum forum.",
     "keywords": [
         "extension",
         "flarum",
-        "user list",
-        "member list",
-        "user directory"
+        "leader boarrd"
     ],
     "type": "flarum-extension",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/FriendsOfFlarum/user-directory/issues",
-        "source": "https://github.com/FriendsOfFlarum/user-directory",
-        "forum": "https://discuss.flarum.org/d/5682"
+        "forum": "https://www.nodeloc.com"
     },
-    "homepage": "https://friendsofflarum.org",
-    "funding": [
-        {
-            "type": "website",
-            "url": "https://opencollective.com/fof/donate"
-        }
-    ],
+    "homepage": "https://www.nodeloc.com",
     "authors": [
         {
-            "name": "Daniël Klabbers",
-            "email": "daniel@klabbers.email",
-            "homepage": "https://luceos.com/"
-        },
-        {
-            "name": "Clark Winkelmann",
-            "email": "clark.winkelmann@gmail.com",
-            "homepage": "https://clarkwinkelmann.com/"
+            "name": "James",
+            "email": "james@nodeloc.com",
+            "homepage": "https://www.nodeloc.com/"
         }
     ],
     "require": {
-        "flarum/core": "^1.7.0",
+        "flarum/core": "^1.8.5",
         "ext-json": "*"
-    },
-    "replace": {
-        "flagrow/user-directory": "*"
     },
     "extra": {
         "flarum-extension": {
-            "title": "FoF User Directory",
+            "title": "Nodeloc Leaderboard",
             "category": "feature",
             "icon": {
-                "name": "far fa-address-book",
+                "name": "fas fa-sort-amount-up",
                 "backgroundColor": "#e74c3c",
                 "color": "#fff"
             },
             "optional-dependencies": [
                 "flarum/suspend"
             ]
-        },
-        "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/5682"
         },
         "flarum-cli": {
             "modules": {
@@ -66,31 +45,8 @@
     },
     "autoload": {
         "psr-4": {
-            "FoF\\UserDirectory\\": "src/"
+            "Nodeloc\\LeaderBoard\\": "src/"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "FoF\\UserDirectory\\Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "test": [
-            "@test:unit",
-            "@test:integration"
-        ],
-        "test:unit": "phpunit -c tests/phpunit.unit.xml",
-        "test:integration": "phpunit -c tests/phpunit.integration.xml",
-        "test:setup": "@php tests/integration/setup.php",
-        "analyse:phpstan": "phpstan analyse",
-        "clear-cache:phpstan": "phpstan clear-result-cache"
-    },
-    "scripts-descriptions": {
-        "test": "Runs all tests.",
-        "test:unit": "Runs all unit tests.",
-        "test:integration": "Runs all integration tests.",
-        "test:setup": "Sets up a database for use with integration tests. Execute this only once.",
-        "analyse:phpstan": "Run static analysis"
     },
     "require-dev": {
         "flarum/testing": "^1.0.0",

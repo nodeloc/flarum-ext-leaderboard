@@ -9,8 +9,8 @@ import LinkButton from 'flarum/common/components/LinkButton';
 import SelectDropdown from 'flarum/common/components/SelectDropdown';
 import Dropdown from 'flarum/common/components/Dropdown';
 import extractText from 'flarum/common/utils/extractText';
-import UserDirectoryList from './UserDirectoryList';
-import UserDirectoryState from '../states/UserDirectoryState';
+import LeaderBoardList from './LeaderBoardList';
+import LeaderBoardState from '../states/LeaderBoardState';
 import CheckableButton from './CheckableButton';
 import SearchField from './SearchField';
 import Separator from 'flarum/common/components/Separator';
@@ -18,11 +18,11 @@ import Separator from 'flarum/common/components/Separator';
 /**
  * This page re-uses Flarum's IndexPage CSS classes
  */
-export default class UserDirectoryPage extends Page {
+export default class LeaderBoardPage extends Page {
   oninit(vnode) {
     super.oninit(vnode);
 
-    this.state = new UserDirectoryState({});
+    this.state = new LeaderBoardState({});
     this.state.refreshParams(app.search.params());
 
     this.bodyClass = 'User--directory';
@@ -46,13 +46,13 @@ export default class UserDirectoryPage extends Page {
       }
     }
 
-    app.history.push('users', app.translator.trans('fof-user-directory.forum.header.back_to_user_directory_tooltip'));
+    app.history.push('users', app.translator.trans('nodeloc-leaderboard.forum.header.back_to_user_directory_tooltip'));
   }
 
   oncreate(vnode) {
     super.oncreate(vnode);
 
-    app.setTitle(extractText(app.translator.trans('fof-user-directory.forum.page.nav')));
+    app.setTitle(extractText(app.translator.trans('nodeloc-leaderboard.forum.page.nav')));
   }
 
   view() {
@@ -69,7 +69,7 @@ export default class UserDirectoryPage extends Page {
                 <ul className="IndexPage-toolbar-view">{listItems(this.viewItems().toArray())}</ul>
                 <ul className="IndexPage-toolbar-action">{listItems(this.actionItems().toArray())}</ul>
               </div>
-              <UserDirectoryList state={this.state} />
+              <LeaderBoardList state={this.state} />
             </div>
           </div>
         </div>
@@ -111,13 +111,13 @@ export default class UserDirectoryPage extends Page {
     const params = this.stickyParams();
 
     items.add(
-      'fof-user-directory',
+      'nodeloc-leaderboard',
       LinkButton.component(
         {
-          href: app.route('fof_user_directory', params),
+          href: app.route('nodeloc_leaderboard', params),
           icon: 'far fa-address-book',
         },
-        app.translator.trans('fof-user-directory.forum.page.nav')
+        app.translator.trans('nodeloc-leaderboard.forum.page.nav')
       ),
       85
     );
@@ -131,104 +131,18 @@ export default class UserDirectoryPage extends Page {
 
     const sortOptions = {};
     for (const i in sortMap) {
-      sortOptions[i] = app.translator.trans('fof-user-directory.lib.sort.' + i);
+      sortOptions[i] = app.translator.trans('nodeloc-leaderboard.lib.sort.' + i);
     }
 
     items.add(
       'sort',
       Select.component({
         options: sortOptions,
-        value: this.state.getParams().sort || app.forum.attribute('userDirectoryDefaultSort'),
+        value: this.state.getParams().sort || app.forum.attribute('leaderBoardDefaultSort'),
         onchange: this.changeParams.bind(this),
       }),
       100
     );
-
-    items.add(
-      'filterGroups',
-      Dropdown.component(
-        {
-          caretIcon: 'fas fa-filter',
-          label: app.translator.trans('fof-user-directory.forum.page.filter_button'),
-          buttonClassName: 'FormControl',
-          className: 'GroupFilterDropdown',
-        },
-        this.groupItems().toArray()
-      ),
-      80
-    );
-
-    items.add(
-      'search',
-      SearchField.component({
-        state: this.state,
-      }),
-      60
-    );
-
-    return items;
-  }
-
-  groupItems() {
-    const items = new ItemList();
-
-    app.store
-      .all('groups')
-      .filter((group) => group.id() !== '2' && group.id() !== '3')
-      .forEach((group) => {
-        items.add(
-          group.namePlural(),
-          CheckableButton.component(
-            {
-              className: 'GroupFilterButton',
-              icon: group.icon(),
-              checked: this.enabledGroupFilters.includes(group.id()),
-              onclick: () => {
-                const id = group.id();
-                if (this.enabledGroupFilters.includes(id)) {
-                  this.enabledGroupFilters = this.enabledGroupFilters.filter((e) => e != id);
-                } else {
-                  this.enabledGroupFilters.push(id);
-                  // Empty the special group filters
-                  this.enabledSpecialGroupFilters = [];
-                }
-
-                this.changeParams(this.params().sort);
-              },
-            },
-            group.namePlural()
-          )
-        );
-      });
-
-    if (app.initializers.has('flarum-suspend') && app.forum.attribute('hasSuspendPermission')) {
-      items.add(
-        'suspend',
-        CheckableButton.component(
-          {
-            className: 'GroupFilterButton',
-            icon: 'fas fa-ban',
-            checked: this.enabledSpecialGroupFilters['flarum-suspend'] === 'is:suspended',
-            onclick: () => {
-              const id = 'flarum-suspend';
-              if (this.enabledSpecialGroupFilters[id] === 'is:suspended') {
-                this.enabledSpecialGroupFilters[id] = '';
-              } else {
-                this.enabledSpecialGroupFilters[id] = 'is:suspended';
-                // Empty the group filters
-                this.enabledGroupFilters = [];
-              }
-
-              this.changeParams(this.params().sort);
-            },
-          },
-          app.translator.trans('flarum-suspend.forum.user_badge.suspended_tooltip')
-        ),
-        90
-      );
-
-      items.add('seperator', Separator.component(), 50);
-    }
 
     return items;
   }
@@ -239,7 +153,7 @@ export default class UserDirectoryPage extends Page {
     items.add(
       'refresh',
       Button.component({
-        title: app.translator.trans('fof-user-directory.forum.page.refresh_tooltip'),
+        title: app.translator.trans('nodeloc-leaderboard.forum.page.refresh_tooltip'),
         icon: 'fas fa-sync',
         className: 'Button Button--icon',
         onclick: () => {
@@ -263,25 +177,10 @@ export default class UserDirectoryPage extends Page {
   changeParams(sort) {
     const params = this.params();
 
-    if (sort === app.forum.attribute('userDirectoryDefaultSort')) {
+    if (sort === app.forum.attribute('leaderBoardDefaultSort')) {
       delete params.sort;
     } else {
       params.sort = sort;
-    }
-
-    let moreQ = '';
-    for (const filter in this.enabledSpecialGroupFilters) {
-      moreQ += this.enabledSpecialGroupFilters[filter] + ' ';
-    }
-
-    if (this.enabledGroupFilters.length > 0) {
-      const groupsQ = this.enabledGroupFilters.reduce((prev, curr) => {
-        return `${prev}${prev ? ' ' : ''}group:${curr}`;
-      }, '');
-
-      params.qBuilder = { groups: groupsQ };
-    } else {
-      params.qBuilder = { groups: '', q: moreQ.trim() };
     }
 
     this.state.refreshParams(params);
@@ -289,7 +188,7 @@ export default class UserDirectoryPage extends Page {
     const routeParams = { ...params };
     delete routeParams.qBuilder;
 
-    m.route.set(app.route('fof_user_directory', routeParams));
+    m.route.set(app.route('nodeloc_leaderboard', routeParams));
   }
 
   stickyParams() {

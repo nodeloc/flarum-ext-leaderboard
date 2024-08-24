@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "@fof/user-directory",
+    "name": "@nodeloc/flarum-ext-leaderboard",
     "prettier": "@flarum/prettier-config",
     "dependencies": {
         "@flarum/prettier-config": "^1.0.0",

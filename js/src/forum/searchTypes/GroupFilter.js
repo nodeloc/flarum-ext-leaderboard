@@ -32,12 +32,12 @@ export default class GroupFilter extends AbstractType {
   }
 
   renderKind() {
-    return app.translator.trans('fof-user-directory.forum.search.kinds.group');
+    return app.translator.trans('nodeloc-leaderboard.forum.search.kinds.group');
   }
 
   renderLabel(group) {
     return m(
-      '.UserDirectorySearchLabel',
+      '.LeaderBoardSearchLabel',
       group.color()
         ? {
             className: 'colored',

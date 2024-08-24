@@ -1,18 +1,11 @@
 <?php
 
-/*
- * This file is part of fof/user-directory.
- *
- * Copyright (c) FriendsOfFlarum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace FoF\UserDirectory;
+namespace Nodeloc\LeaderBoard;
 
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
+use Flarum\Api\Controller\ListUsersController;
+use Illuminate\Database\Eloquent\Builder;
 
 return [
     (new Extend\Frontend('admin'))
@@ -21,7 +14,7 @@ return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/resources/less/forum.less')
-        ->route('/users', 'fof_user_directory', Content\UserDirectory::class),
+        ->route('/users', 'nodeloc_leaderboard', Content\LeaderBoard::class),
 
     new Extend\Locales(__DIR__.'/resources/locale'),
 
@@ -32,15 +25,21 @@ return [
         ->globalPolicy(Access\UserPolicy::class),
 
     (new Extend\View())
-        ->namespace('fof.user-directory', __DIR__.'/resources/views'),
-
+        ->namespace('nodeloc.leaderboard', __DIR__.'/resources/views'),
+    (new Extend\ApiController(ListUsersController::class))
+        ->addSortField('money')
+        ->addSortField('lotteryCount')
+        ->addSortField('bestAnswerCount')
+        ->addSortField('lastCheckinMoney')
+        ->addSortField('monthlyDiscussionCount')
+        ->addSortField('monthlyCommentCount'),
     (new Extend\Settings())
-        ->default('fof-user-directory.admin.settings.link', false)
-        ->default('fof-user-directory.use-small-cards', false)
-        ->default('fof-user-directory.disable-global-search-source', false)
-        ->default('fof-user-directory.default-sort', 'default')
-        ->default('fof-user-directory.link-group-mentions', true)
-        ->serializeToForum('userDirectorySmallCards', 'fof-user-directory.use-small-cards', 'boolVal')
-        ->serializeToForum('userDirectoryDisableGlobalSearchSource', 'fof-user-directory.disable-global-search-source', 'boolVal')
-        ->serializeToForum('userDirectoryLinkGroupMentions', 'fof-user-directory.link-group-mentions', 'boolVal'),
+        ->default('nodeloc-leaderboard.admin.settings.link', false)
+        ->default('nodeloc-leaderboard.use-small-cards', false)
+        ->default('nodeloc-leaderboard.disable-global-search-source', false)
+        ->default('nodeloc-leaderboard.default-sort', 'default')
+        ->default('nodeloc-leaderboard.link-group-mentions', true)
+        ->serializeToForum('leaderBoardSmallCards', 'nodeloc-leaderboard.use-small-cards', 'boolVal')
+        ->serializeToForum('leaderBoardDisableGlobalSearchSource', 'nodeloc-leaderboard.disable-global-search-source', 'boolVal')
+        ->serializeToForum('leaderBoardLinkGroupMentions', 'nodeloc-leaderboard.link-group-mentions', 'boolVal'),
 ];

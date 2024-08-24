@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\UserDirectory\Access;
+namespace Nodeloc\LeaderBoard\Access;
 
 use Flarum\User\Access\AbstractPolicy;
 use Flarum\User\User;
@@ -18,6 +18,6 @@ class UserPolicy extends AbstractPolicy
 {
     public function seeUserList(User $actor)
     {
-        return $actor->hasPermission('fof.user-directory.view') && $actor->hasPermission('searchUsers');
+        return $actor->hasPermission('nodeloc.leaderboard.view') && $actor->hasPermission('searchUsers');
     }
 }

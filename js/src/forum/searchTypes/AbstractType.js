@@ -37,7 +37,7 @@ export default class AbstractType {
 
   /**
    * Renders the Label containing the suggestion's value
-   * Should be a vdom template using the .UserDirectorySearchLabel class or similar
+   * Should be a vdom template using the .LeaderBoardSearchLabel class or similar
    * @param {Model} resource
    * @return {vnode}
    */

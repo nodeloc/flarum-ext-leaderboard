@@ -3,7 +3,7 @@
  */
 import SortMap from '../../common/utils/SortMap';
 
-export default class UserDirectoryState {
+export default class LeaderBoardState {
   constructor(params = {}, app = window.app) {
     this.params = params;
 
@@ -21,7 +21,7 @@ export default class UserDirectoryState {
   requestParams() {
     const params = { include: [], filter: {} };
 
-    const sortKey = this.params.sort || app.forum.attribute('userDirectoryDefaultSort');
+    const sortKey = this.params.sort || app.forum.attribute('leaderBoardDefaultSort');
 
     // sort might be set to null if no sort params has been passed
     params.sort = this.sortMap()[sortKey];

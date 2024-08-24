@@ -1,17 +1,17 @@
 import CheckableButton from './CheckableButton';
 import SearchField from './SearchField';
 import SmallUserCard from './SmallUserCard';
-import UserDirectoryList from './UserDirectoryList';
-import UserDirectoryListItem from './UserDirectoryListItem';
-import UserDirectoryPage from './UserDirectoryPage';
-import UserDirectoryUserCard from './UserDirectoryUserCard';
+import LeaderBoardList from './LeaderBoardList';
+import LeaderBoardListItem from './LeaderBoardListItem';
+import LeaderBoardPage from './LeaderBoardPage';
+import LeaderBoardUserCard from './LeaderBoardUserCard';
 
 export const components = {
   CheckableButton,
   SearchField,
   SmallUserCard,
-  UserDirectoryList,
-  UserDirectoryListItem,
-  UserDirectoryPage,
-  UserDirectoryUserCard,
+  LeaderBoardList,
+  LeaderBoardListItem,
+  LeaderBoardPage,
+  LeaderBoardUserCard,
 };

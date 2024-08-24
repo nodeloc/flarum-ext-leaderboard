@@ -5,7 +5,7 @@ import AbstractType from './AbstractType';
 
 export default class TextFilter extends AbstractType {
   resourceType() {
-    return 'fof-user-directory-text';
+    return 'nodeloc-leaderboard-text';
   }
 
   search(query) {
@@ -15,7 +15,7 @@ export default class TextFilter extends AbstractType {
     }
 
     this.suggestions = [
-      app.store.createRecord('fof-user-directory-text', {
+      app.store.createRecord('nodeloc-leaderboard-text', {
         attributes: {
           text: query,
         },
@@ -24,11 +24,11 @@ export default class TextFilter extends AbstractType {
   }
 
   renderKind() {
-    return app.translator.trans('fof-user-directory.forum.search.kinds.text');
+    return app.translator.trans('nodeloc-leaderboard.forum.search.kinds.text');
   }
 
   renderLabel(resource) {
-    return m('.UserDirectorySearchLabel', resource.text());
+    return m('.LeaderBoardSearchLabel', resource.text());
   }
 
   applyFilter(params, resource) {
@@ -47,7 +47,7 @@ export default class TextFilter extends AbstractType {
         // Words with : are gambits and we will ignore them
         .filter((word) => word.indexOf(':') === -1)
         .map((word) =>
-          app.store.createRecord('fof-user-directory-text', {
+          app.store.createRecord('nodeloc-leaderboard-text', {
             attributes: {
               text: word,
             },

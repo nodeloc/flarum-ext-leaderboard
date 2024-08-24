@@ -3,40 +3,40 @@ import SortMap from '../common/utils/SortMap';
 
 export { SortMap };
 
-app.initializers.add('fof-user-directory', (app) => {
+app.initializers.add('nodeloc-leaderboard', (app) => {
   const sortOptions = {
-    '': app.translator.trans('fof-user-directory.lib.sort.not_specified'),
+    '': app.translator.trans('nodeloc-leaderboard.lib.sort.not_specified'),
   };
 
   Object.keys(new SortMap().sortMap()).forEach((sort) => {
-    sortOptions[sort] = app.translator.trans('fof-user-directory.lib.sort.' + sort);
+    sortOptions[sort] = app.translator.trans('nodeloc-leaderboard.lib.sort.' + sort);
   });
 
   app.extensionData
-    .for('fof-user-directory')
+    .for('nodeloc-leaderboard')
     .registerSetting({
-      setting: 'fof-user-directory-link',
-      label: app.translator.trans('fof-user-directory.admin.settings.link'),
+      setting: 'nodeloc-leaderboard-link',
+      label: app.translator.trans('nodeloc-leaderboard.admin.settings.link'),
       type: 'boolean',
     })
     .registerSetting({
-      setting: 'fof-user-directory.use-small-cards',
-      label: app.translator.trans('fof-user-directory.admin.settings.use-small-cards'),
+      setting: 'nodeloc-leaderboard.use-small-cards',
+      label: app.translator.trans('nodeloc-leaderboard.admin.settings.use-small-cards'),
       type: 'boolean',
     })
     .registerSetting({
-      setting: 'fof-user-directory.disable-global-search-source',
-      label: app.translator.trans('fof-user-directory.admin.settings.disable-global-search-source'),
+      setting: 'nodeloc-leaderboard.disable-global-search-source',
+      label: app.translator.trans('nodeloc-leaderboard.admin.settings.disable-global-search-source'),
       type: 'boolean',
     })
     .registerSetting({
-      setting: 'fof-user-directory.link-group-mentions',
-      label: app.translator.trans('fof-user-directory.admin.settings.link-group-mentions'),
+      setting: 'nodeloc-leaderboard.link-group-mentions',
+      label: app.translator.trans('nodeloc-leaderboard.admin.settings.link-group-mentions'),
       type: 'boolean',
     })
     .registerSetting({
-      setting: 'fof-user-directory.default-sort',
-      label: app.translator.trans('fof-user-directory.admin.settings.default-sort'),
+      setting: 'nodeloc-leaderboard.default-sort',
+      label: app.translator.trans('nodeloc-leaderboard.admin.settings.default-sort'),
       options: sortOptions,
       type: 'select',
       default: '',
@@ -44,8 +44,8 @@ app.initializers.add('fof-user-directory', (app) => {
     .registerPermission(
       {
         icon: 'far fa-address-book',
-        label: app.translator.trans('fof-user-directory.admin.permissions.view_user_directory'),
-        permission: 'fof.user-directory.view',
+        label: app.translator.trans('nodeloc-leaderboard.admin.permissions.view_user_directory'),
+        permission: 'nodeloc.leaderboard.view',
         allowGuest: true,
       },
       'view'

@@ -70,11 +70,11 @@ export default class SearchField extends Component {
 
     return (
       <div className="Form-group Usersearchbox">
-        <label className={`UserDirectorySearchInput FormControl ${this.focused ? 'focus' : ''}`}>
-          <span className="UserDirectorySearchInput-selected">
+        <label className={`LeaderBoardSearchInput FormControl ${this.focused ? 'focus' : ''}`}>
+          <span className="LeaderBoardSearchInput-selected">
             {this.appliedFilters.map((recipient, index) => (
               <span
-                className="UserDirectorySearchInput-filter"
+                className="LeaderBoardSearchInput-filter"
                 onclick={() => {
                   this.appliedFilters.splice(index, 1);
                   this.applyFiltering();
@@ -87,7 +87,7 @@ export default class SearchField extends Component {
           </span>
           <input
             className="FormControl"
-            placeholder={app.translator.trans('fof-user-directory.forum.search.field.placeholder')}
+            placeholder={app.translator.trans('nodeloc-leaderboard.forum.search.field.placeholder')}
             value={this.filter}
             oninput={withAttr('value', (value) => {
               this.filter = value;
@@ -113,7 +113,7 @@ export default class SearchField extends Component {
                   }}
                 >
                   <button type="button">
-                    <span className="UserDirectorySearchKind">{this.searchResultKind(result)}</span>
+                    <span className="LeaderBoardSearchKind">{this.searchResultKind(result)}</span>
                     {this.recipientLabel(result)}
                   </button>
                 </li>
@@ -208,6 +208,6 @@ export default class SearchField extends Component {
 
     this.qBuilder(params);
 
-    m.route.set(app.route('fof_user_directory', params));
+    m.route.set(app.route('nodeloc_leaderboard', params));
   }
 }

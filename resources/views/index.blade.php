@@ -2,7 +2,7 @@
 $url = resolve('Flarum\Http\UrlGenerator');
 ?>
 <div class="container">
-    <h2>{{ $translator->trans('fof-user-directory.forum.page.nav') }}</h2>
+    <h2>{{ $translator->trans('nodeloc-leaderboard.forum.page.nav') }}</h2>
 
     <ul>
         @foreach ($apiDocument->data as $user)
@@ -12,5 +12,5 @@ $url = resolve('Flarum\Http\UrlGenerator');
         @endforeach
     </ul>
 
-    <a href="{{ $url->to('forum')->route('fof_user_directory') }}?page={{ $page + 1 }}">{{ $translator->trans('core.views.index.next_page_button') }} &raquo;</a>
+    <a href="{{ $url->to('forum')->route('nodeloc_leaderboard') }}?page={{ $page + 1 }}">{{ $translator->trans('core.views.index.next_page_button') }} &raquo;</a>
 </div>

@@ -1,15 +1,5 @@
 <?php
-
-/*
- * This file is part of fof/user-directory.
- *
- * Copyright (c) FriendsOfFlarum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace FoF\UserDirectory\Content;
+namespace Nodeloc\LeaderBoard\Content;
 
 use Flarum\Api\Client;
 use Flarum\Frontend\Document;
@@ -20,8 +10,9 @@ use Flarum\User\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Carbon\Carbon;
 
-class UserDirectory
+class LeaderBoard
 {
     /**
      * @var Client
@@ -37,19 +28,20 @@ class UserDirectory
      * @var SettingsRepositoryInterface
      */
     protected $settings;
-
     /**
      * A map of sort query param values to their API sort param.
      *
      * @var array
      */
     private $sortMap = [
-        'username_az'       => 'username',
-        'username_za'       => '-username',
-        'newest'            => '-joinedAt',
-        'oldest'            => 'joinedAt',
-        'most_discussions'  => '-discussionCount',
-        'least_discussions' => 'discussionCount',
+        'money'       => '-money',
+        'lotteryCount'      => '-lotteryCount',
+        'bestAnswerCount'   => '-bestAnswerCount',
+        'lastCheckinMoney'  => '-lastCheckinMoney',
+        'monthlyDiscussionCount'=> '-monthlyDiscussionCount',
+        'monthlyCommentCount' => '-monthlyCommentCount',
+        'discussionCount'   => 'discussionCount',
+        'commentCount'      => 'commentCount',
     ];
 
     public function __construct(Client $api, Factory $view, SettingsRepositoryInterface $settings)
@@ -62,8 +54,8 @@ class UserDirectory
     private function getDocument(User $actor, array $params, Request $request)
     {
         $actor->assertCan('seeUserList');
-
         return json_decode($this->api->withQueryParams($params)->withParentRequest($request)->get('/users')->getBody());
+
     }
 
     /**
@@ -74,7 +66,7 @@ class UserDirectory
         $queryParams = $request->getQueryParams();
         $actor = RequestUtil::getActor($request);
 
-        $sort = Arr::pull($queryParams, 'sort') ?: $this->settings->get('fof-user-directory.default-sort');
+        $sort = Arr::pull($queryParams, 'sort') ?: $this->settings->get('nodeloc-leaderboard.default-sort');
         $q = Arr::pull($queryParams, 'q');
         $page = Arr::pull($queryParams, 'page', 1);
 
@@ -87,7 +79,7 @@ class UserDirectory
 
         $apiDocument = $this->getDocument($actor, $params, $request);
 
-        $document->content = $this->view->make('fof.user-directory::index', compact('page', 'apiDocument'));
+        $document->content = $this->view->make('nodeloc.leaderboard::index', compact('page', 'apiDocument'));
 
         $document->payload['apiDocument'] = $apiDocument;
 

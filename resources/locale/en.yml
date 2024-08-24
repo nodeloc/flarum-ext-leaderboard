@@ -1,4 +1,4 @@
-fof-user-directory:
+nodeloc-leaderboard:
     forum:
         header:
             back_to_user_directory_tooltip: Back to User Directory
@@ -34,11 +34,11 @@ fof-user-directory:
         sort:
             not_specified: Use Flarum default
             default: Default
-            username_az: Username (a-z)
-            username_za: Username (z-a)
-            newest: Newest
-            oldest: Oldest
-            most_posts: Most posts
-            least_posts: Least posts
-            most_discussions: Most discussions
-            least_discussions: Least discussions
+            money: Money
+            lotteryCount: Lottery Count
+            bestAnswerCount: Best Answer Count
+            lastCheckinMoney: Checkin Money
+            monthlyDiscussionCount: Monthly Dscussions
+            monthlyCommentCount: Monthly Posts
+            discussionCount: Discussion Count
+            commentCount: Comment Count

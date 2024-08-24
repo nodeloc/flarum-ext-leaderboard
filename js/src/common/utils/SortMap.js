@@ -5,12 +5,14 @@
 export default class SortMap {
   sortMap() {
     return {
-      username_az: 'username',
-      username_za: '-username',
-      newest: '-joinedAt',
-      oldest: 'joinedAt',
-      most_discussions: '-discussionCount',
-      least_discussions: 'discussionCount',
+      money       : '-money',
+      lotteryCount     : '-lotteryCount',
+      bestAnswerCount  : '-bestAnswerCount',
+      lastCheckinMoney    : '-lastCheckinMoney',
+      monthlyDiscussionCount       : 'monthlyDiscussionCount',
+      monthlyCommentCount: 'monthlyCommentCount',
+      discussionCount   : '-discussionCount',
+      commentCount     : '-commentCount',
     };
   }
 }
