@@ -14,7 +14,7 @@ return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/resources/less/forum.less')
-        ->route('/users', 'nodeloc_leaderboard', Content\LeaderBoard::class),
+        ->route('/leaderboard', 'nodeloc_leaderboard', Content\LeaderBoard::class),
 
     new Extend\Locales(__DIR__.'/resources/locale'),
 

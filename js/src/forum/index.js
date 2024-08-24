@@ -39,7 +39,7 @@ export const linkGroupMentions = function () {
 
 app.initializers.add('nodeloc-leaderboard', (app) => {
   app.routes.nodeloc_leaderboard = {
-    path: '/users',
+    path: '/leaderboard',
     component: LeaderBoardPage,
   };
 
