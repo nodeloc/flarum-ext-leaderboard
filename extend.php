@@ -35,11 +35,5 @@ return [
         ->addSortField('monthlyCommentCount'),
     (new Extend\Settings())
         ->default('nodeloc-leaderboard.admin.settings.link', false)
-        ->default('nodeloc-leaderboard.use-small-cards', false)
-        ->default('nodeloc-leaderboard.disable-global-search-source', false)
-        ->default('nodeloc-leaderboard.default-sort', 'default')
-        ->default('nodeloc-leaderboard.link-group-mentions', true)
-        ->serializeToForum('leaderBoardSmallCards', 'nodeloc-leaderboard.use-small-cards', 'boolVal')
-        ->serializeToForum('leaderBoardDisableGlobalSearchSource', 'nodeloc-leaderboard.disable-global-search-source', 'boolVal')
-        ->serializeToForum('leaderBoardLinkGroupMentions', 'nodeloc-leaderboard.link-group-mentions', 'boolVal'),
+        ->default('nodeloc-leaderboard.default-sort', 'default'),
 ];

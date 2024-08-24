@@ -19,32 +19,17 @@ app.initializers.add('nodeloc-leaderboard', (app) => {
       label: app.translator.trans('nodeloc-leaderboard.admin.settings.link'),
       type: 'boolean',
     })
-    .registerSetting({
-      setting: 'nodeloc-leaderboard.use-small-cards',
-      label: app.translator.trans('nodeloc-leaderboard.admin.settings.use-small-cards'),
-      type: 'boolean',
-    })
-    .registerSetting({
-      setting: 'nodeloc-leaderboard.disable-global-search-source',
-      label: app.translator.trans('nodeloc-leaderboard.admin.settings.disable-global-search-source'),
-      type: 'boolean',
-    })
-    .registerSetting({
-      setting: 'nodeloc-leaderboard.link-group-mentions',
-      label: app.translator.trans('nodeloc-leaderboard.admin.settings.link-group-mentions'),
-      type: 'boolean',
-    })
-    .registerSetting({
-      setting: 'nodeloc-leaderboard.default-sort',
-      label: app.translator.trans('nodeloc-leaderboard.admin.settings.default-sort'),
-      options: sortOptions,
-      type: 'select',
-      default: '',
-    })
+      .registerSetting({
+          setting: 'nodeloc-leaderboard.default-sort',
+          label: app.translator.trans('nodeloc-leaderboard.admin.settings.default-sort'),
+          options: sortOptions,
+          type: 'select',
+          default: '',
+      })
     .registerPermission(
       {
-        icon: 'far fa-address-book',
-        label: app.translator.trans('nodeloc-leaderboard.admin.permissions.view_user_directory'),
+        icon: 'fas fa-sort-amount-up',
+        label: app.translator.trans('nodeloc-leaderboard.admin.permissions.view_leader_board'),
         permission: 'nodeloc.leaderboard.view',
         allowGuest: true,
       },

@@ -9,8 +9,8 @@ export default class SortMap {
       lotteryCount     : '-lotteryCount',
       bestAnswerCount  : '-bestAnswerCount',
       lastCheckinMoney    : '-lastCheckinMoney',
-      monthlyDiscussionCount       : 'monthlyDiscussionCount',
-      monthlyCommentCount: 'monthlyCommentCount',
+      monthlyDiscussionCount       : '-monthlyDiscussionCount',
+      monthlyCommentCount: '-monthlyCommentCount',
       discussionCount   : '-discussionCount',
       commentCount     : '-commentCount',
     };

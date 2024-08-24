@@ -1,0 +1,45 @@
+nodeloc-leaderboard:
+    forum:
+        header:
+            back_to_leader_board_tooltip: 返回排行榜
+
+        search:
+            users_heading: '搜索包含 "{query}" 的所有用户'
+            field:
+                placeholder: 搜索所有用户
+            kinds:
+                group: 用户组
+                text: 关键词
+
+        page:
+            nav: 排行榜
+            refresh_tooltip: => core.forum.index.refresh_tooltip
+            load_more_button: => core.ref.load_more
+            empty_text: 我们无法找到符合您搜索条件的用户。
+            filter_button: 筛选用户组
+            usercard:
+                discussion-count: "{count, plural, one { {count} 个讨论} other {{count} 个讨论}}"
+                post-count: "{count, plural, one { {count} 篇帖子} other {{count} 篇帖子}}"
+
+    admin:
+        permissions:
+            view_leader_board: 查看用户排行榜
+        settings:
+            link: 在首页为可以查看排行榜的用户添加链接
+            default-sort: 默认排序
+            use-small-cards: 使用小型用户卡片
+            disable-global-search-source: 不将排行榜添加到 Flarum 全局搜索字段中
+            link-group-mentions: 在帖子中链接到用户组提及的排行榜
+
+    lib:
+        sort:
+            not_specified: 默认
+            default: 默认
+            money: 能量榜
+            lotteryCount: 慈善榜
+            bestAnswerCount: 助人榜
+            lastCheckinMoney: 运势榜
+            monthlyDiscussionCount: 月度帖王
+            monthlyCommentCount: 月度水王
+            discussionCount: 帖王
+            commentCount: 水王

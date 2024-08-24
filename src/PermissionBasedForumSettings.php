@@ -29,7 +29,7 @@ class PermissionBasedForumSettings
     public function __invoke(ForumSerializer $serializer, $model, array $attributes): array
     {
         // The link is visible if the user can access the user directory AND the link was enabled in extension settings
-        $attributes['canSeeLeaderBoardLink'] = $serializer->getActor()->can('seeUserList') && $this->settings->get('nodeloc-leaderboard-link');
+        $attributes['canSeeLeaderBoardLink'] = $serializer->getActor()->can('seeLeaderBoard') && $this->settings->get('nodeloc-leaderboard-link');
         $attributes['leaderBoardDefaultSort'] = $this->settings->get('nodeloc-leaderboard.default-sort') ?: 'default';
 
         // Only serialize if the actor has permission

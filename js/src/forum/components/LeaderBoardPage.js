@@ -7,13 +7,10 @@ import Select from 'flarum/common/components/Select';
 import Button from 'flarum/common/components/Button';
 import LinkButton from 'flarum/common/components/LinkButton';
 import SelectDropdown from 'flarum/common/components/SelectDropdown';
-import Dropdown from 'flarum/common/components/Dropdown';
 import extractText from 'flarum/common/utils/extractText';
 import LeaderBoardList from './LeaderBoardList';
 import LeaderBoardState from '../states/LeaderBoardState';
-import CheckableButton from './CheckableButton';
-import SearchField from './SearchField';
-import Separator from 'flarum/common/components/Separator';
+
 
 /**
  * This page re-uses Flarum's IndexPage CSS classes
@@ -25,7 +22,7 @@ export default class LeaderBoardPage extends Page {
     this.state = new LeaderBoardState({});
     this.state.refreshParams(app.search.params());
 
-    this.bodyClass = 'User--directory';
+    this.bodyClass = 'Leader--Board';
 
     let idSegments = [];
     if (this.params().q) {
@@ -33,20 +30,8 @@ export default class LeaderBoardPage extends Page {
         idSegments.push(match[1]);
       });
     }
-    this.enabledGroupFilters = idSegments
-      .join(',')
-      .split(',')
-      .filter((id) => id);
 
-    this.enabledSpecialGroupFilters = [];
-    if (app.initializers.has('flarum-suspend') && app.forum.attribute('hasSuspendPermission')) {
-      // If there is a special group filter int the params, enable it here
-      if (this.params()?.q?.includes('is:suspended')) {
-        this.enabledSpecialGroupFilters['flarum-suspend'] = 'is:suspended';
-      }
-    }
-
-    app.history.push('users', app.translator.trans('nodeloc-leaderboard.forum.header.back_to_user_directory_tooltip'));
+    app.history.push('leaderboard', app.translator.trans('nodeloc-leaderboard.forum.header.back_to_leader_board_tooltip'));
   }
 
   oncreate(vnode) {
@@ -115,7 +100,7 @@ export default class LeaderBoardPage extends Page {
       LinkButton.component(
         {
           href: app.route('nodeloc_leaderboard', params),
-          icon: 'far fa-address-book',
+          icon: 'fas fa-sort-amount-up',
         },
         app.translator.trans('nodeloc-leaderboard.forum.page.nav')
       ),

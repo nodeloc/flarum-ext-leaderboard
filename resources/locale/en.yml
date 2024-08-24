@@ -1,7 +1,7 @@
 nodeloc-leaderboard:
     forum:
         header:
-            back_to_user_directory_tooltip: Back to User Directory
+            back_to_leader_board_tooltip: Back to Leader Board
 
         search:
             users_heading: 'Search all users for "{query}"'
@@ -11,7 +11,7 @@ nodeloc-leaderboard:
                 group: Group
                 text: Free text
         page:
-            nav: User Directory
+            nav: LeaderBoard
             refresh_tooltip: => core.forum.index.refresh_tooltip
             load_more_button: => core.ref.load_more
             empty_text: We could not find any user matching your search.
@@ -22,23 +22,23 @@ nodeloc-leaderboard:
 
     admin:
         permissions:
-            view_user_directory: View user directory
+            view_leader_board: View user directory
         settings:
             link: Add link on homepage for users able to see the directory
             default-sort: Default sort
             use-small-cards: Use small user cards
-            disable-global-search-source: Do not add User Directory to the Flarum global search field
-            link-group-mentions: Link group mentions in posts to the User Directory
+            disable-global-search-source: Do not add Leader Board to the Flarum global search field
+            link-group-mentions: Link group mentions in posts to the Leader Board
 
     lib:
         sort:
-            not_specified: Use Flarum default
+            not_specified: default
             default: Default
             money: Money
             lotteryCount: Lottery Count
             bestAnswerCount: Best Answer Count
             lastCheckinMoney: Checkin Money
-            monthlyDiscussionCount: Monthly Dscussions
+            monthlyDiscussionCount: Monthly Discussions
             monthlyCommentCount: Monthly Posts
             discussionCount: Discussion Count
             commentCount: Comment Count

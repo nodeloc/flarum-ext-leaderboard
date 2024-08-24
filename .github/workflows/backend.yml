@@ -1,4 +1,4 @@
-name: FoF User Directory PHP
+name: FoF Leader Board PHP
 
 on: [workflow_dispatch, push, pull_request]
 
