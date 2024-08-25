@@ -13,7 +13,7 @@ export default class LeaderBoardUserCard extends Component {
      */
     view() {
         const user = this.attrs.user;
-        const sort = this.attrs.params.sort;
+        const sort = this.attrs.params.sort || 'money';
         const userProfileLink = app.route.user(user);
 
         const points = user.attribute(sort) || '0';

@@ -4,6 +4,8 @@ namespace Nodeloc\LeaderBoard;
 
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
+use Flarum\Post\Event\Posted;
+use Flarum\Discussion\Event\Started;
 use Flarum\Api\Controller\ListUsersController;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -23,7 +25,9 @@ return [
 
     (new Extend\Policy())
         ->globalPolicy(Access\UserPolicy::class),
-
+    (new Extend\Event())
+        ->listen(Posted::class, [Listeners\UpdateCount::class, 'postWasPosted'])
+        ->listen(Started::class, [Listeners\UpdateCount::class, 'discussionWasStarted']),
     (new Extend\View())
         ->namespace('nodeloc.leaderboard', __DIR__.'/resources/views'),
     (new Extend\ApiController(ListUsersController::class))

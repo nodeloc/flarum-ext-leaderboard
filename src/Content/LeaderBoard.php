@@ -53,7 +53,6 @@ class LeaderBoard
 
     private function getDocument(User $actor, array $params, Request $request)
     {
-        $actor->assertCan('seeLeaderBoard');
         return json_decode($this->api->withQueryParams($params)->withParentRequest($request)->get('/users')->getBody());
     }
 
@@ -71,7 +70,7 @@ class LeaderBoard
 
         $params = [
             // ?? used to prevent null values. null would result in the whole sortMap array being sent in the params
-            'sort'   => Arr::get($this->sortMap, $sort ?? '', '-joinedAt'),
+            'sort'   => Arr::get($this->sortMap, $sort ?? '', ''),
             'filter' => compact('q'),
             'page'   => ['offset' => ($page - 1) * 20, 'limit' => 20],
         ];
