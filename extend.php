@@ -4,8 +4,11 @@ namespace Nodeloc\LeaderBoard;
 
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Post\Event\Posted;
 use Flarum\Discussion\Event\Started;
+use Flarum\Post\Event\Deleted as PostDeleted;
+use Flarum\Discussion\Event\Deleted as DiscussionDeleted;
 use Flarum\Api\Controller\ListUsersController;
 use Illuminate\Database\Eloquent\Builder;
 
