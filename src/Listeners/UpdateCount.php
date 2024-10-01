@@ -43,16 +43,30 @@ class UpdateCount
 
     public function postWasPosted(Posted $event)
     {
-        $user = $event->actor;
-        $user ->increment('monthly_comment_count', 1);
-        $user->save();
+        if ($event->post['number'] > 1) {
+            $user = $event->actor;
+            $user ->increment('monthly_comment_count', 1);
+            $user->save();
+        }
     }
-
+    public function postWasDeleted(PostDeleted $event)
+    {
+        if ($event->post['number'] > 1) {
+            $user = $event->actor;
+            $user ->decrement('monthly_comment_count', 1);
+            $user->save();
+        }
+    }
     public function discussionWasStarted(Started $event)
     {
         $user = $event->actor;
         $user ->increment('monthly_discussion_count', 1);
         $user->save();
     }
-
+    public function discussionWasDeleted(DiscussionDeleted $event)
+    {
+        $user = $event->actor;
+        $user ->decrement('monthly_discussion_count', 1);
+        $user->save();
+    }
 }
