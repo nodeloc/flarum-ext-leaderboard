@@ -40,5 +40,7 @@ nodeloc-leaderboard:
             lastCheckinMoney: Checkin Money
             monthlyDiscussionCount: Monthly Discussions
             monthlyCommentCount: Monthly Posts
+            lastMonthlyDiscussionCount: Last Monthly Discussions
+            lastMonthlyCommentCount: Last Monthly Posts
             discussionCount: Discussion Count
             commentCount: Comment Count

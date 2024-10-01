@@ -41,5 +41,7 @@ nodeloc-leaderboard:
             lastCheckinMoney: 运势榜
             monthlyDiscussionCount: 月度帖王
             monthlyCommentCount: 月度水王
+            lastMonthlyDiscussionCount: 上月帖王
+            lastMonthlyCommentCount: 上月水王
             discussionCount: 帖王
             commentCount: 水王

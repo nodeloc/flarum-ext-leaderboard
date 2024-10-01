@@ -34,14 +34,14 @@ class LeaderBoard
      * @var array
      */
     private $sortMap = [
-        'money'       => '-money',
-        'lotteryCount'      => '-lotteryCount',
-        'bestAnswerCount'   => '-bestAnswerCount',
-        'lastCheckinMoney'  => '-lastCheckinMoney',
-        'monthlyDiscussionCount'=> '-monthlyDiscussionCount',
+        'money' => '-money',
+        'lotteryCount' => '-lotteryCount',
+        'bestAnswerCount' => '-bestAnswerCount',
+        'lastCheckinMoney' => '-lastCheckinMoney',
+        'monthlyDiscussionCount' => '-monthlyDiscussionCount',
         'monthlyCommentCount' => '-monthlyCommentCount',
-        'discussionCount'   => 'discussionCount',
-        'commentCount'      => 'commentCount',
+        'discussionCount' => 'discussionCount',
+        'commentCount' => 'commentCount',
     ];
 
     public function __construct(Client $api, Factory $view, SettingsRepositoryInterface $settings)
@@ -70,16 +70,19 @@ class LeaderBoard
 
         $params = [
             // ?? used to prevent null values. null would result in the whole sortMap array being sent in the params
-            'sort'   => Arr::get($this->sortMap, $sort ?? '', ''),
+            'sort' => Arr::get($this->sortMap, $sort ?? '', ''),
             'filter' => compact('q'),
-            'page'   => ['offset' => ($page - 1) * 20, 'limit' => 20],
+            'page' => ['offset' => ($page - 1) * 20, 'limit' => 20],
         ];
 
-        $apiDocument = $this->getDocument($actor, $params, $request);
+        $_REQUEST['user-directory.sort'] = $params['sort'];
+        if (!in_array($sort, ["lastCheckinMoney", "monthlyDiscussionCount", "monthlyCommentCount", "lastMonthlyDiscussionCount", "lastMonthlyCommentCount"])) {
+            $apiDocument = $this->getDocument($actor, $params, $request);
 
-        $document->content = $this->view->make('nodeloc.leaderboard::index', compact('page', 'apiDocument'));
+            $document->content = $this->view->make('nodeloc.leaderboard::index', compact('page', 'apiDocument'));
 
-        $document->payload['apiDocument'] = $apiDocument;
+            $document->payload['apiDocument'] = $apiDocument;
+        }
 
         return $document;
     }

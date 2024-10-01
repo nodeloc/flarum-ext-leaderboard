@@ -5,14 +5,16 @@
 export default class SortMap {
   sortMap() {
     return {
-      money       : '-money',
-      lotteryCount     : '-lotteryCount',
-      bestAnswerCount  : '-bestAnswerCount',
-      lastCheckinMoney    : '-lastCheckinMoney',
-      monthlyDiscussionCount       : '-monthlyDiscussionCount',
+      money: '-money',
+      lotteryCount: '-lotteryCount',
+      bestAnswerCount: '-bestAnswerCount',
+      lastCheckinMoney: '-lastCheckinMoney',
+      monthlyDiscussionCount: '-monthlyDiscussionCount',
       monthlyCommentCount: '-monthlyCommentCount',
-      discussionCount   : '-discussionCount',
-      commentCount     : '-commentCount',
+      lastMonthlyDiscussionCount: '-lastMonthlyDiscussionCount',
+      lastMonthlyCommentCount: '-lastMonthlyCommentCount',
+      discussionCount: '-discussionCount',
+      commentCount: '-commentCount',
     };
   }
 }

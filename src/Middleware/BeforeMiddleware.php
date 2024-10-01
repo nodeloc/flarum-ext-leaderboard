@@ -23,7 +23,7 @@ class BeforeMiddleware implements MiddlewareInterface
         $path = $request->getUri()->getPath();
         if ($path === '/users') {
             $sort = Arr::get($request->getQueryParams(), 'sort');
-            if ($sort === "-lastCheckinMoney") {
+            if (in_array($sort, ["-lastCheckinMoney", "-monthlyDiscussionCount", "-monthlyCommentCount", "-lastMonthlyDiscussionCount", "-lastMonthlyCommentCount"])) {
                 $request = $request->withAttribute('user-directory.sort', $sort);
                 $_REQUEST['user-directory.sort'] = $sort;
             }
