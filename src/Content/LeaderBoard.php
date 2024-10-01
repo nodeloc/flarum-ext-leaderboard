@@ -76,7 +76,7 @@ class LeaderBoard
         ];
 
         $_REQUEST['user-directory.sort'] = $params['sort'];
-        if (!in_array($sort, ["lastCheckinMoney", "monthlyDiscussionCount", "monthlyCommentCount"])) {
+        if (!in_array($sort, ["lastCheckinMoney", "monthlyDiscussionCount", "monthlyCommentCount", "lastMonthlyDiscussionCount", "lastMonthlyCommentCount"])) {
             $apiDocument = $this->getDocument($actor, $params, $request);
 
             $document->content = $this->view->make('nodeloc.leaderboard::index', compact('page', 'apiDocument'));

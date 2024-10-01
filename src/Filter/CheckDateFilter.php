@@ -44,6 +44,27 @@ class CheckDateFilter
                         ]);
                 })
                 ->groupBy('users.id');
+        } else if ($sort == '-lastMonthlyCommentCount') {
+            $filter->getQuery()->selectRaw($tablePrefix . 'users.*, COALESCE(COUNT(' . $tablePrefix . 'posts.id), 0) as last_monthly_comment_count')
+                ->leftJoin('posts', function ($join) use ($tablePrefix) {
+                    $join->on('users.id', '=', 'posts.user_id')
+                        ->whereBetween('posts.created_at', [
+                            $this->carbonZoneHelper->now()->subMonth()->setDay(1)->setTime(0, 0)->utc(),
+                            $this->carbonZoneHelper->now()->subMonth()->lastOfMonth()->setTime(23, 59)->utc(),
+                        ])
+                        ->where('posts.number', '>', 1);
+                })
+                ->groupBy('users.id');
+        } else if ($sort == '-lastMonthlyDiscussionCount') {
+            $filter->getQuery()->selectRaw($tablePrefix . 'users.*, COALESCE(COUNT(' . $tablePrefix . 'discussions.id), 0) as last_monthly_discussion_count')
+                ->leftJoin('discussions', function ($join) use ($tablePrefix) {
+                    $join->on('users.id', '=', 'discussions.user_id')
+                        ->whereBetween('discussions.created_at', [
+                            $this->carbonZoneHelper->now()->subMonth()->setDay(1)->setTime(0, 0)->utc(),
+                            $this->carbonZoneHelper->now()->subMonth()->lastOfMonth()->setTime(23, 59)->utc(),
+                        ]);
+                })
+                ->groupBy('users.id');
         }
     }
 }
