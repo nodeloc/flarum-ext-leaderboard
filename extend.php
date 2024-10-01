@@ -3,6 +3,7 @@
 namespace Nodeloc\LeaderBoard;
 
 use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Extend;
 use Flarum\Extend\ApiController;
 use Flarum\Post\Event\Posted;
@@ -24,12 +25,13 @@ return [
 
     (new Extend\ApiSerializer(ForumSerializer::class))
         ->attributes(PermissionBasedForumSettings::class),
-
+    // (new Extend\ApiSerializer(UserSerializer::class))
+    //     ->attribute('monthlyDiscussionCount', "monthlyDiscussionCount"),
     (new Extend\Policy())
         ->globalPolicy(Access\UserPolicy::class),
-    (new Extend\Event())
-        ->listen(Posted::class, [Listeners\UpdateCount::class, 'postWasPosted'])
-        ->listen(Started::class, [Listeners\UpdateCount::class, 'discussionWasStarted']),
+    // (new Extend\Event())
+    //     ->listen(Posted::class, [Listeners\UpdateCount::class, 'postWasPosted'])
+    //     ->listen(Started::class, [Listeners\UpdateCount::class, 'discussionWasStarted']),
     (new Extend\View())
         ->namespace('nodeloc.leaderboard', __DIR__ . '/resources/views'),
     (new Extend\ApiController(ListUsersController::class))
@@ -47,4 +49,10 @@ return [
         ->add(Middleware\BeforeMiddleware::class),
     (new Extend\Filter(UserFilterer::class))
         ->addFilterMutator(Filter\CheckDateFilter::class),
+    (new Extend\ApiSerializer(UserSerializer::class))
+        ->attributes(function ($s, $model, $attrs) {
+            $attrs['monthlyCommentCount'] = $model->monthly_comment_count ?? 0;
+            $attrs['monthlyDiscussionCount'] = $model->monthly_discussion_count ?? 0;
+            return $attrs;
+        })
 ];
